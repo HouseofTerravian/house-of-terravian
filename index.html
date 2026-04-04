@@ -1,13 +1,21 @@
+<!--
+    HOW TO ADD NEW LETTERS:
+    1. Find the LETTERS_DATA array in the <script> section at the bottom of this file.
+    2. Add a new object to the array with these properties:
+       - title: (string) The letter title
+       - date: (string) Display date, e.g. "Apr 24, 2024"
+       - excerpt: (string) A short excerpt or summary
+       - category: (string) One of: Power, Love, Money, Density, Construction, Law of One, Terravian Bifurcation Protocol, Terravian Journal
+       - tags: (string) Comma-separated tags for the meta line
+       - type: (string) "Public", "Paid", or "Archive"
+    3. The letter will automatically appear in the Letters grid and be filterable by category.
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The House of Terravian - A Living Archive of Power & Wisdom</title>
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <link rel="icon" type="image/png" sizes="48x48" href="favicon-48x48.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
     <style>
         * {
             margin: 0;
@@ -65,6 +73,7 @@
             color: var(--gold);
             font-weight: bold;
             letter-spacing: 2px;
+            cursor: pointer;
         }
 
         .nav-links {
@@ -87,9 +96,19 @@
             color: var(--gold);
         }
 
+        /* Mobile menu toggle */
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--gold);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
         /* Home Page */
         #home {
-            background: 
+            background:
                 linear-gradient(rgba(10, 10, 10, 0.4), rgba(139, 21, 56, 0.7)),
                 repeating-linear-gradient(
                     0deg,
@@ -111,7 +130,7 @@
             background-position: center;
             position: relative;
         }
-        
+
         #home::before {
             content: '';
             position: absolute;
@@ -119,7 +138,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background-image: 
+            background-image:
                 radial-gradient(circle at 20% 80%, rgba(212, 175, 55, 0.1) 0%, transparent 3%),
                 radial-gradient(circle at 80% 20%, rgba(212, 175, 55, 0.08) 0%, transparent 3%),
                 radial-gradient(circle at 40% 40%, rgba(212, 175, 55, 0.06) 0%, transparent 2%),
@@ -129,7 +148,7 @@
             animation: shimmer 8s ease-in-out infinite;
             pointer-events: none;
         }
-        
+
         #home::after {
             content: '';
             position: absolute;
@@ -140,7 +159,7 @@
             background: linear-gradient(to top, rgba(10, 10, 10, 0.9), transparent);
             pointer-events: none;
         }
-        
+
         @keyframes shimmer {
             0%, 100% { opacity: 0.5; }
             50% { opacity: 1; }
@@ -150,7 +169,7 @@
         .content-page {
             padding-top: 100px;
             min-height: 100vh;
-            background: 
+            background:
                 repeating-linear-gradient(
                     45deg,
                     transparent,
@@ -161,7 +180,7 @@
                 linear-gradient(180deg, #8B1538 0%, #5D0E25 30%, #2D0713 70%, #0A0A0A 100%);
             position: relative;
         }
-        
+
         .content-page::before {
             content: '';
             position: absolute;
@@ -169,7 +188,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background-image: 
+            background-image:
                 radial-gradient(circle at 15% 25%, rgba(212, 175, 55, 0.08) 0%, transparent 25%),
                 radial-gradient(circle at 85% 60%, rgba(212, 175, 55, 0.06) 0%, transparent 25%),
                 radial-gradient(circle at 50% 80%, rgba(212, 175, 55, 0.05) 0%, transparent 30%);
@@ -267,9 +286,9 @@
         .page-header {
             text-align: center;
             padding: 4rem 2rem;
-            background: linear-gradient(135deg, 
-                rgba(93, 14, 37, 0.9) 0%, 
-                rgba(139, 21, 56, 0.95) 50%, 
+            background: linear-gradient(135deg,
+                rgba(93, 14, 37, 0.9) 0%,
+                rgba(139, 21, 56, 0.95) 50%,
                 rgba(93, 14, 37, 0.9) 100%
             ),
             repeating-linear-gradient(
@@ -283,7 +302,7 @@
             position: relative;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
         }
-        
+
         .page-header::before {
             content: '';
             position: absolute;
@@ -294,7 +313,7 @@
             background: radial-gradient(ellipse at 50% 0%, rgba(212, 175, 55, 0.15), transparent 60%);
             pointer-events: none;
         }
-        
+
         .page-header::after {
             content: '';
             position: absolute;
@@ -330,7 +349,7 @@
         .category-filters {
             display: flex;
             justify-content: center;
-            gap: 1.5rem;
+            gap: 1rem;
             margin-bottom: 3rem;
             flex-wrap: wrap;
         }
@@ -343,8 +362,9 @@
             cursor: pointer;
             transition: all 0.3s;
             text-transform: uppercase;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             letter-spacing: 1px;
+            font-family: 'Georgia', serif;
         }
 
         .filter-btn:hover, .filter-btn.active {
@@ -456,77 +476,62 @@
         }
 
         /* Brands Page */
-        .brands-constellation {
-            position: relative;
-            min-height: 600px;
-            margin: 4rem 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .brands-section {
+            margin-bottom: 4rem;
         }
 
-        .constellation-center {
-            position: absolute;
-            width: 200px;
-            height: 200px;
-            background: radial-gradient(circle, var(--gold), var(--gold-dark));
-            border-radius: 50%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            border: 3px solid var(--cream);
-            box-shadow: 0 0 60px rgba(212, 175, 55, 0.8);
-            z-index: 10;
-        }
-
-        .constellation-center h3 {
-            color: var(--burgundy-dark);
-            font-size: 1.2rem;
-            text-align: center;
-        }
-
-        .brand-orbit {
-            position: absolute;
-            width: 140px;
-            height: 140px;
-            background: rgba(139, 21, 56, 0.9);
-            border: 2px solid var(--gold);
-            border-radius: 10px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 1rem;
-            text-align: center;
-            transition: all 0.3s;
-            cursor: pointer;
-        }
-
-        .brand-orbit:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 30px rgba(212, 175, 55, 0.6);
-            z-index: 5;
-        }
-
-        .brand-orbit h4 {
+        .brands-section h2 {
             color: var(--gold);
-            font-size: 0.9rem;
+            font-size: 1.8rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 2rem;
+            text-align: center;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .brands-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+
+        .brands-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .brand-card {
+            background: linear-gradient(135deg, rgba(139, 21, 56, 0.6), rgba(93, 14, 37, 0.8));
+            border: 2px solid var(--gold);
+            padding: 1.5rem 2rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .brand-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+        }
+
+        .brand-card h4 {
+            color: var(--gold);
+            font-size: 1.1rem;
             margin-bottom: 0.5rem;
         }
 
-        .brand-orbit p {
+        .brand-card p {
             color: var(--cream);
-            font-size: 0.75rem;
+            font-size: 0.9rem;
+            font-style: italic;
+            opacity: 0.85;
         }
-
-        /* Position brands in orbit */
-        .brand-orbit:nth-child(2) { top: -80px; left: 50%; transform: translateX(-50%); }
-        .brand-orbit:nth-child(3) { top: 50%; right: -100px; transform: translateY(-50%); }
-        .brand-orbit:nth-child(4) { bottom: -80px; left: 50%; transform: translateX(-50%); }
-        .brand-orbit:nth-child(5) { top: 50%; left: -100px; transform: translateY(-50%); }
-        .brand-orbit:nth-child(6) { top: 20%; right: 10%; }
-        .brand-orbit:nth-child(7) { bottom: 20%; left: 10%; }
 
         /* About Page */
         .about-content {
@@ -647,6 +652,7 @@
             text-decoration: none;
             font-size: 0.9rem;
             transition: color 0.3s;
+            cursor: pointer;
         }
 
         .footer-links a:hover {
@@ -669,9 +675,25 @@
                 font-size: 2.5rem;
             }
 
+            .nav-toggle {
+                display: block;
+            }
+
             .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(139, 21, 56, 0.98);
+                flex-direction: column;
+                padding: 1rem 2rem;
                 gap: 1rem;
-                font-size: 0.8rem;
+                border-bottom: 2px solid var(--gold);
+            }
+
+            .nav-links.open {
+                display: flex;
             }
 
             .cta-buttons {
@@ -679,14 +701,12 @@
                 gap: 1rem;
             }
 
-            .brands-constellation {
-                min-height: 800px;
+            .letters-grid {
+                grid-template-columns: 1fr;
             }
 
-            .brand-orbit {
-                position: relative !important;
-                margin: 1rem;
-                transform: none !important;
+            .brands-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -695,7 +715,8 @@
     <!-- Navigation -->
     <nav>
         <div class="nav-container">
-            <div class="nav-logo">TERRAVIAN</div>
+            <div class="nav-logo" onclick="showPage('home')">TERRAVIAN</div>
+            <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')">&#9776;</button>
             <ul class="nav-links">
                 <li><a onclick="showPage('home')">Home</a></li>
                 <li><a onclick="showPage('about')">About</a></li>
@@ -711,20 +732,29 @@
     <div id="home" class="page active">
         <div class="hero">
             <div class="crest">
-                <div class="crest-inner">⚖</div>
+                <div class="crest-inner">&#9878;</div>
             </div>
             <h1>The House of Terravian</h1>
             <p class="tagline">A Living Archive of Power & Wisdom</p>
             <p class="description">
-                Where consciousness, strategy, and lineage converge. This is not a brand. 
-                It is a house—built on coherence, governed by conscience, and rooted in 
+                Where consciousness, strategy, and lineage converge. This is not a brand.
+                It is a house&#8212;built on coherence, governed by conscience, and rooted in
                 time horizons that transcend egoic timeframes.
             </p>
             <div class="cta-buttons">
-                <button class="btn" onclick="showPage('library')">Enter the Archive →</button>
+                <button class="btn" onclick="showPage('library')">Enter the Archive &rarr;</button>
                 <button class="btn btn-secondary" onclick="showPage('about')">Learn More</button>
             </div>
         </div>
+        <footer>
+            <div class="footer-links">
+                <a onclick="showPage('library')">Letters</a>
+                <a onclick="showPage('brands')">Brands</a>
+                <a onclick="showPage('legal')">Legal</a>
+                <a onclick="showPage('community')">Community</a>
+            </div>
+            <p class="copyright">House of Terravian | Toravian Dynasty Trust | MCM Enterprises | All Rights Reserved</p>
+        </footer>
     </div>
 
     <!-- About Page -->
@@ -737,28 +767,28 @@
             <div class="content-container">
                 <div class="about-content">
                     <p class="about-quote">
-                        "The House of Terravian is a living archive of power and wisdom. It is a steward of 
+                        "The House of Terravian is a living archive of power and wisdom. It is a steward of
                         complex wealth and catalytic intel. It is a commons founded by conscience, not by blood."
                     </p>
                     <div class="about-statement">
-                        This is not a personal brand. It is not a corporate entity seeking extraction. 
-                        It is a sovereign structure designed to hold consciousness work, strategic intelligence, 
-                        and creative capital across generations—without fragmenting under market pressure or 
+                        This is not a personal brand. It is not a corporate entity seeking extraction.
+                        It is a sovereign structure designed to hold consciousness work, strategic intelligence,
+                        and creative capital across generations&#8212;without fragmenting under market pressure or
                         collapsing into cult dynamics.
                     </div>
                     <div class="pillars">
                         <div class="pillar">
-                            <div class="pillar-icon">△</div>
+                            <div class="pillar-icon">&#9651;</div>
                             <h3>Order</h3>
                             <p>Governance for a sovereign house of ideas. Clear structures that enable freedom rather than constrain it.</p>
                         </div>
                         <div class="pillar">
-                            <div class="pillar-icon">✦</div>
+                            <div class="pillar-icon">&#10022;</div>
                             <h3>Value</h3>
                             <p>Catalyzation of clear density, not hollow hype. Everything created here serves coherence.</p>
                         </div>
                         <div class="pillar">
-                            <div class="pillar-icon">⚘</div>
+                            <div class="pillar-icon">&#9880;</div>
                             <h3>Roots</h3>
                             <p>Time horizons that transcend egoic timeframes. Built to age, not to trend.</p>
                         </div>
@@ -768,16 +798,16 @@
         </div>
         <footer>
             <div class="footer-links">
-                <a href="#" onclick="showPage('library')">Letters</a>
-                <a href="https://substack.com" target="_blank">Substack</a>
-                <a href="#" onclick="showPage('legal')">Legal</a>
-                <a href="#" onclick="showPage('community')">Community</a>
+                <a onclick="showPage('library')">Letters</a>
+                <a onclick="showPage('brands')">Brands</a>
+                <a onclick="showPage('legal')">Legal</a>
+                <a onclick="showPage('community')">Community</a>
             </div>
-            <p class="copyright">Aurora Dominus | House of the Inner Sun | Copyright © 2024</p>
+            <p class="copyright">House of Terravian | Toravian Dynasty Trust | MCM Enterprises | All Rights Reserved</p>
         </footer>
     </div>
 
-    <!-- Library Page -->
+    <!-- Library Page (Letters) -->
     <div id="library" class="page">
         <div class="content-page">
             <div class="page-header">
@@ -785,87 +815,29 @@
                 <p class="subtitle">A Living Archive of Power & Wisdom</p>
             </div>
             <div class="content-container">
-                <div class="category-filters">
-                    <button class="filter-btn active">All</button>
-                    <button class="filter-btn">⚔ Power</button>
-                    <button class="filter-btn">🔥 Love</button>
-                    <button class="filter-btn">⚖ Money</button>
-                    <button class="filter-btn">♾ Density</button>
-                    <button class="filter-btn">⚒ Construction</button>
+                <div class="category-filters" id="categoryFilters">
+                    <!-- Filter buttons rendered by JS -->
                 </div>
-                <div class="letters-grid">
-                    <div class="letter-card">
-                        <h3>The Founding Letter</h3>
-                        <p class="letter-date">Apr 24, 2024 • Public Letter</p>
-                        <p class="letter-excerpt">
-                            Where one mind documents the building of a life, a lineage, and a system—without asking permission. 
-                            This is not self-help. This is field intelligence from inside the work.
-                        </p>
-                        <p class="letter-meta">Beginnings • Clarity • Authority</p>
-                    </div>
-                    <div class="letter-card">
-                        <h3>Beyond Self-Betrayal</h3>
-                        <p class="letter-date">Apr 12, 2024 • Public Letter</p>
-                        <p class="letter-excerpt">
-                            Coherence is powerful. It is also expensive. Most people do not fail because they lack discipline—
-                            they fail because they are split between who they are and who they perform.
-                        </p>
-                        <p class="letter-meta">Love • Integrity • Therapsian</p>
-                    </div>
-                    <div class="letter-card">
-                        <h3>Tools of Empire</h3>
-                        <p class="letter-date">Mar 30, 2024 • Public Letter</p>
-                        <p class="letter-excerpt">
-                            The technologies of power—seers and unseen. Money without self-betrayal requires understanding 
-                            the actual mechanics of leverage, not prosperity theater.
-                        </p>
-                        <p class="letter-meta">Power • Strategy • Aurora Dominus</p>
-                    </div>
-                    <div class="letter-card">
-                        <h3>The Shambles</h3>
-                        <p class="letter-date">Apr 18, 2024 • Paid Subscribers</p>
-                        <p class="letter-excerpt">
-                            Private convocation calls for leaders caught in crossfire. When systems collapse and you're still 
-                            standing—what then? Real notes from inside therapeutic complexity.
-                        </p>
-                        <p class="letter-meta">Apr 10, 2024 • Money for Others</p>
-                    </div>
-                    <div class="letter-card">
-                        <h3>Behind the Veil</h3>
-                        <p class="letter-date">Mar 18, 2024 • Archive</p>
-                        <p class="letter-excerpt">
-                            Honest counsel for those on the brink of despair. This is not inspiration—it's orientation when 
-                            language fails but patterns don't.
-                        </p>
-                        <p class="letter-meta">Mar 26, 2024 • Meant for Adam-&-Core</p>
-                    </div>
-                    <div class="letter-card">
-                        <h3>Catalog of Empire</h3>
-                        <p class="letter-date">May 12, 2024 • Archive</p>
-                        <p class="letter-excerpt">
-                            A systematic inventory of sovereignty tools, conscious capital structures, and integration frameworks 
-                            for those building without blueprints.
-                        </p>
-                        <p class="letter-meta">May 12, 2024</p>
-                    </div>
+                <div class="letters-grid" id="lettersGrid">
+                    <!-- Letter cards rendered by JS -->
                 </div>
                 <div style="text-align: center; margin-top: 3rem; padding: 3rem; background: rgba(139, 21, 56, 0.3); border: 2px solid var(--gold);">
-Enter the Inner Chamber</h3>
+                    <h3 style="color: var(--gold); font-size: 1.5rem; margin-bottom: 1rem;">Enter the Inner Chamber</h3>
                     <p style="color: var(--cream); margin-bottom: 2rem; line-height: 1.6;">
                         Paid members receive private letters, strategic maps, and therapeutic audit logs from inside the work.
                     </p>
-                    <button class="btn">Subscribe →</button>
+                    <button class="btn">Subscribe &rarr;</button>
                 </div>
             </div>
         </div>
         <footer>
             <div class="footer-links">
-                <a href="https://substack.com" target="_blank">Substack</a>
-                <a href="#" onclick="showPage('legal')">Legal</a>
-                <a href="#" onclick="alert('Contact coming soon')">Contact</a>
-                <a href="#" onclick="alert('Disclaimer: This is not legal, financial, or medical advice.')">Disclaimer</a>
+                <a onclick="showPage('about')">About</a>
+                <a onclick="showPage('brands')">Brands</a>
+                <a onclick="showPage('legal')">Legal</a>
+                <a onclick="showPage('community')">Community</a>
             </div>
-            <p class="copyright">Aurora Dominus | House of the Inner Sun | Copyright © 2024</p>
+            <p class="copyright">House of Terravian | Toravian Dynasty Trust | MCM Enterprises | All Rights Reserved</p>
         </footer>
     </div>
 
@@ -879,58 +851,59 @@ Enter the Inner Chamber</h3>
             <div class="content-container">
                 <div class="legal-grid">
                     <div class="legal-card">
-                        <div class="legal-icon">⚖</div>
+                        <div class="legal-icon">&#9878;</div>
                         <h3>Trust of Terravian</h3>
-                        <p class="legal-date">Mar 24, 2024 • Public Letter</p>
+                        <p class="legal-date">Mar 24, 2024 &bull; Public Letter</p>
                         <p>
-                            The charter, the lineage, the structure. The Toravian Dynasty Estate is structured for 
-                            continuity—not just for creators, but for generations.
+                            The charter, the lineage, the structure. The Toravian Dynasty Estate is structured for
+                            continuity&#8212;not just for creators, but for generations.
                         </p>
                     </div>
                     <div class="legal-card">
-                        <div class="legal-icon">⚖</div>
+                        <div class="legal-icon">&#9878;</div>
                         <h3>Intellectual Property</h3>
-                        <p class="legal-date">Apr 12, 2024 • Public Letter</p>
+                        <p class="legal-date">Apr 12, 2024 &bull; Public Letter</p>
                         <p>
-                            Rights and licenses woven into stewardship of language, symbol, and lineage architecture. 
+                            Rights and licenses woven into stewardship of language, symbol, and lineage architecture.
                             IP as sacred trust, not commodity.
                         </p>
                     </div>
                     <div class="legal-card">
-                        <div class="legal-icon">⚖</div>
+                        <div class="legal-icon">&#9878;</div>
                         <h3>Ethics & Enforcement</h3>
-                        <p class="legal-date">Mar 30, 2024 • Public Letter</p>
+                        <p class="legal-date">Mar 30, 2024 &bull; Public Letter</p>
                         <p>
-                            Trustworthiness in action. Transparency protocols including licensing revokes and entity 
+                            Trustworthiness in action. Transparency protocols including licensing revokes and entity
                             strike ethics. Boundaries that matter.
                         </p>
                     </div>
                     <div class="legal-card">
-                        <div class="legal-icon">⚖</div>
+                        <div class="legal-icon">&#9878;</div>
                         <h3>Contact & Counsel</h3>
-                        <p class="legal-date">Mar 03, 2024 • Public Letter</p>
+                        <p class="legal-date">Mar 03, 2024 &bull; Public Letter</p>
                         <p>
-                            Thresholds for legal counsel, contact windows, and next actions after high-integrity sign. 
+                            Thresholds for legal counsel, contact windows, and next actions after high-integrity sign.
                             Access with intention.
                         </p>
                     </div>
                 </div>
                 <div class="legal-disclaimer">
-                    <strong>Legal Disclaimer:</strong> This is not an offer, a solicitation, or legal advice. 
-                    Consult your legal and tax professionals before taking action based on this site. 
-                    The House of Terravian operates through multiple legal entities including Toravian Dynasty Trust 
-                    and SlateRiver LLC. All intellectual property, trademarks, and creative works are protected under 
+                    <strong>Legal Disclaimer:</strong> This is not an offer, a solicitation, or legal advice.
+                    Consult your legal and tax professionals before taking action based on this site.
+                    The House of Terravian operates through multiple legal entities including Toravian Dynasty Trust
+                    and SlateRiver LLC. All intellectual property, trademarks, and creative works are protected under
                     applicable law. Unauthorized use, reproduction, or distribution is prohibited and subject to enforcement.
                 </div>
             </div>
         </div>
         <footer>
             <div class="footer-links">
-                <a href="https://substack.com" target="_blank">Substack</a>
-                <a href="#" onclick="alert('Contact: legal@houseofterravian.com')">Contact</a>
-                <a href="#" onclick="alert('Full legal disclaimer and terms of use.')">Disclaimer</a>
+                <a onclick="showPage('about')">About</a>
+                <a onclick="showPage('library')">Letters</a>
+                <a onclick="showPage('brands')">Brands</a>
+                <a onclick="showPage('community')">Community</a>
             </div>
-            <p class="copyright">Aurora Dominus | House of the Inner Sun | Copyright © 2024</p>
+            <p class="copyright">House of Terravian | Toravian Dynasty Trust | MCM Enterprises | All Rights Reserved</p>
         </footer>
     </div>
 
@@ -942,46 +915,135 @@ Enter the Inner Chamber</h3>
                 <p class="subtitle">A Constellation of Conscious Capital</p>
             </div>
             <div class="content-container">
-                <div class="brands-constellation">
-                    <div class="constellation-center">
-                        <h3>AURORA<br>DOMINUS</h3>
-                        <p style="font-size: 0.75rem; color: var(--burgundy-dark); margin-top: 0.5rem;">Sovereign Influence</p>
-                    </div>
-                    <div class="brand-orbit">
-                        <h4>Mr. Metaphysical</h4>
-                        <p>MMHW - The Global Wellness School</p>
-                    </div>
-                    <div class="brand-orbit">
-                        <h4>Crownstrike</h4>
-                        <p>Premium sports merchandise & empowerment</p>
-                    </div>
-                    <div class="brand-orbit">
-                        <h4>House of the Inner Sun</h4>
-                        <p>Consciousness work without cosplay</p>
-                    </div>
-                    <div class="brand-orbit">
-                        <h4>Noo World OS</h4>
-                        <p>A sovereign operating system</p>
-                    </div>
-                    <div class="brand-orbit">
-                        <h4>Messiah Merch</h4>
-                        <p>Risen & Pipped Holy Cocoa - Chocolate Jesus</p>
-                    </div>
-                    <div class="brand-orbit">
-                        <h4>121212.black</h4>
-                        <p>Black economic empowerment platform</p>
+
+                <div class="brands-section">
+                    <h2>Spine Brands</h2>
+                    <div class="brands-grid">
+                        <div class="brand-card">
+                            <h4>911 at 911.today</h4>
+                            <p>Where I share my truth. Unfiltered.</p>
+                        </div>
+                        <div class="brand-card">
+                            <h4>Noo World Platforms</h4>
+                            <p>The sovereign operating system</p>
+                        </div>
+                        <div class="brand-card">
+                            <h4>Forbidden Gnosis</h4>
+                            <p>Hidden knowledge, unlocked</p>
+                        </div>
+                        <div class="brand-card">
+                            <h4>SupportGroups.online</h4>
+                            <p>Healing in community</p>
+                        </div>
+                        <div class="brand-card">
+                            <h4>Mr. Metaphysical Health & Wellness</h4>
+                            <p>Consciousness meets commerce</p>
+                        </div>
+                        <div class="brand-card">
+                            <h4>Win The Hour!</h4>
+                            <p>Own every hour of your life</p>
+                        </div>
+                        <div class="brand-card">
+                            <h4>Own The Hour</h4>
+                            <p>Productivity, reimagined</p>
+                        </div>
+                        <div class="brand-card">
+                            <h4>Crownstrike</h4>
+                            <p>Crown your ambition</p>
+                        </div>
+                        <div class="brand-card">
+                            <h4>Saga of Polarity</h4>
+                            <p>Where wanderers find love</p>
+                        </div>
+                        <div class="brand-card">
+                            <h4>121212 Ecosystem</h4>
+                            <p>Black cultural renaissance</p>
+                        </div>
+                        <div class="brand-card">
+                            <h4>Relationship Goals / HHC Travel</h4>
+                            <p>Love journeys, curated</p>
+                        </div>
+                        <div class="brand-card">
+                            <h4>Crystallized Lovers</h4>
+                            <p>The love transformation</p>
+                        </div>
                     </div>
                 </div>
+
+                <div class="brands-section">
+                    <h2>Additional Brands</h2>
+                    <div class="brands-grid">
+                        <div class="brand-card">
+                            <h4>TRPSH</h4>
+                            <p>The Right Path Starts Here</p>
+                        </div>
+                        <div class="brand-card">
+                            <h4>StepLeague</h4>
+                            <p>Gamified step competition</p>
+                        </div>
+                        <div class="brand-card">
+                            <h4>FPWDS</h4>
+                            <p>Friends of People with Disabilities</p>
+                        </div>
+                        <div class="brand-card">
+                            <h4>Launchpad 18</h4>
+                            <p>Career readiness, ages 16-24</p>
+                        </div>
+                        <div class="brand-card">
+                            <h4>GreenRay Creations</h4>
+                            <p>Emerald-coded creations</p>
+                        </div>
+                        <div class="brand-card">
+                            <h4>MySports</h4>
+                            <p>Sports, connected</p>
+                        </div>
+                        <div class="brand-card">
+                            <h4>Bedlam</h4>
+                            <p>Coming soon</p>
+                        </div>
+                        <div class="brand-card">
+                            <h4>Movie Clubbing</h4>
+                            <p>Coming soon</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="brands-section">
+                    <h2>Enterprise / Infrastructure</h2>
+                    <div class="brands-grid">
+                        <div class="brand-card">
+                            <h4>OTMGPT</h4>
+                            <p>Your AI coaching engine</p>
+                        </div>
+                        <div class="brand-card">
+                            <h4>StealthAPI / InvisiCore</h4>
+                            <p>Layer 0 infrastructure</p>
+                        </div>
+                        <div class="brand-card">
+                            <h4>Noo World Login</h4>
+                            <p>One identity, all platforms</p>
+                        </div>
+                        <div class="brand-card">
+                            <h4>BLUME</h4>
+                            <p>She turns ideas into income</p>
+                        </div>
+                        <div class="brand-card">
+                            <h4>S.T.E.A.L.T.H.</h4>
+                            <p>Seed Quietly. Bloom Fully.</p>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
         <footer>
             <div class="footer-links">
-                <a href="https://substack.com" target="_blank">Substack</a>
-                <a href="#" onclick="showPage('legal')">Legal</a>
-                <a href="#" onclick="alert('Contact coming soon')">Contact</a>
-                <a href="#" onclick="alert('Disclaimer')">Disclaimer</a>
+                <a onclick="showPage('about')">About</a>
+                <a onclick="showPage('library')">Letters</a>
+                <a onclick="showPage('legal')">Legal</a>
+                <a onclick="showPage('community')">Community</a>
             </div>
-            <p class="copyright">Aurora Dominus | House of the Inner Sun | Copyright © 2024</p>
+            <p class="copyright">House of Terravian | Toravian Dynasty Trust | MCM Enterprises | All Rights Reserved</p>
         </footer>
     </div>
 
@@ -998,52 +1060,52 @@ Enter the Inner Chamber</h3>
                         Power without service becomes predation. Wealth without stewardship becomes extraction.
                     </p>
                     <p style="color: var(--cream); line-height: 1.8; margin-bottom: 3rem;">
-                        The House of Terravian recognizes that sovereignty requires responsibility. 
-                        These offerings represent our commitment to those who carry heavy loads—
+                        The House of Terravian recognizes that sovereignty requires responsibility.
+                        These offerings represent our commitment to those who carry heavy loads&#8212;
                         leaders, healers, builders, and bearers caught in crossfire.
                     </p>
                 </div>
                 <div class="services-grid">
                     <div class="service-card">
-                        <div class="service-icon">⚓</div>
+                        <div class="service-icon">&#9875;</div>
                         <h3>Safe Harbor</h3>
                         <p>
-                            Private convocation calls for leaders caught in crossfire. When the systems around you 
-                            collapse and you're still standing—what then? Confidential support for those navigating 
+                            Private convocation calls for leaders caught in crossfire. When the systems around you
+                            collapse and you're still standing&#8212;what then? Confidential support for those navigating
                             impossible positions.
                         </p>
                     </div>
                     <div class="service-card">
-                        <div class="service-icon">🕯</div>
+                        <div class="service-icon">&#128367;</div>
                         <h3>Burnout Prevention</h3>
                         <p>
-                            Honest counsel for those on the brink of despair. Not inspiration—orientation. 
-                            For healers, builders, and caretakers who've forgotten how to receive what they 
+                            Honest counsel for those on the brink of despair. Not inspiration&#8212;orientation.
+                            For healers, builders, and caretakers who've forgotten how to receive what they
                             so freely give.
                         </p>
                     </div>
                     <div class="service-card">
-                        <div class="service-icon">👁</div>
+                        <div class="service-icon">&#128065;</div>
                         <h3>Crisis Triage</h3>
                         <p>
-                            Confidential support for those in acute distress. Immediate assessment, resource 
-                            navigation, and reality-testing for moments when clarity is a matter of survival. 
+                            Confidential support for those in acute distress. Immediate assessment, resource
+                            navigation, and reality-testing for moments when clarity is a matter of survival.
                             No judgment. No performance required.
                         </p>
                     </div>
                     <div class="service-card">
-                        <div class="service-icon">🗝</div>
+                        <div class="service-icon">&#128477;</div>
                         <h3>System Unburdening</h3>
                         <p>
-                            Strategic listening for worldbearers. For those carrying organizational dysfunction, 
-                            intergenerational trauma, or systemic injustice in their bodies—a space to name what 
+                            Strategic listening for worldbearers. For those carrying organizational dysfunction,
+                            intergenerational trauma, or systemic injustice in their bodies&#8212;a space to name what
                             cannot be named elsewhere.
                         </p>
                     </div>
                 </div>
                 <div style="text-align: center; margin-top: 4rem; padding: 3rem; background: rgba(139, 21, 56, 0.2); border-left: 4px solid var(--gold);">
                     <p style="color: var(--cream); line-height: 1.8; max-width: 800px; margin: 0 auto;">
-                        These services are offered on a sliding scale and pro bono basis for those who qualify. 
+                        These services are offered on a sliding scale and pro bono basis for those who qualify.
                         Capacity is limited. Contact us to inquire about availability and assess fit.
                     </p>
                     <button class="btn" style="margin-top: 2rem;" onclick="alert('Community Service Contact: service@houseofterravian.com')">
@@ -1054,31 +1116,170 @@ Enter the Inner Chamber</h3>
         </div>
         <footer>
             <div class="footer-links">
-                <a href="https://substack.com" target="_blank">Substack</a>
-                <a href="#" onclick="alert('Contact: service@houseofterravian.com')">Contact</a>
-                <a href="#" onclick="alert('Disclaimer: This is not therapy, legal advice, or medical care.')">Disclaimer</a>
+                <a onclick="showPage('about')">About</a>
+                <a onclick="showPage('library')">Letters</a>
+                <a onclick="showPage('brands')">Brands</a>
+                <a onclick="showPage('legal')">Legal</a>
             </div>
-            <p class="copyright">Aurora Dominus | House of the Inner Sun | Copyright © 2024</p>
+            <p class="copyright">House of Terravian | Toravian Dynasty Trust | MCM Enterprises | All Rights Reserved</p>
         </footer>
     </div>
 
     <script>
+        // ============================================================
+        // LETTERS DATA — Add new letters here as objects in this array.
+        // Each letter needs: title, date, excerpt, category, tags, type
+        // Categories: Power, Love, Money, Density, Construction,
+        //   Law of One, Terravian Bifurcation Protocol, Terravian Journal
+        // Types: Public, Paid, Archive
+        // ============================================================
+        const LETTERS_DATA = [
+            {
+                title: "The Founding Letter",
+                date: "Apr 24, 2024",
+                excerpt: "Where one mind documents the building of a life, a lineage, and a system\u2014without asking permission. This is not self-help. This is field intelligence from inside the work.",
+                category: "Power",
+                tags: "Beginnings \u2022 Clarity \u2022 Authority",
+                type: "Public"
+            },
+            {
+                title: "Beyond Self-Betrayal",
+                date: "Apr 12, 2024",
+                excerpt: "Coherence is powerful. It is also expensive. Most people do not fail because they lack discipline\u2014they fail because they are split between who they are and who they perform.",
+                category: "Love",
+                tags: "Love \u2022 Integrity \u2022 Coherence",
+                type: "Public"
+            },
+            {
+                title: "Tools of Empire",
+                date: "Mar 30, 2024",
+                excerpt: "The technologies of power\u2014seers and unseen. Money without self-betrayal requires understanding the actual mechanics of leverage, not prosperity theater.",
+                category: "Power",
+                tags: "Power \u2022 Strategy \u2022 Leverage",
+                type: "Public"
+            },
+            {
+                title: "The Shambles",
+                date: "Apr 18, 2024",
+                excerpt: "Private convocation calls for leaders caught in crossfire. When systems collapse and you're still standing\u2014what then? Real notes from inside therapeutic complexity.",
+                category: "Money",
+                tags: "Money \u2022 Complexity \u2022 Resilience",
+                type: "Paid"
+            },
+            {
+                title: "Behind the Veil",
+                date: "Mar 18, 2024",
+                excerpt: "Honest counsel for those on the brink of despair. This is not inspiration\u2014it's orientation when language fails but patterns don't.",
+                category: "Density",
+                tags: "Density \u2022 Orientation \u2022 Patterns",
+                type: "Archive"
+            },
+            {
+                title: "Catalog of Empire",
+                date: "May 12, 2024",
+                excerpt: "A systematic inventory of sovereignty tools, conscious capital structures, and integration frameworks for those building without blueprints.",
+                category: "Construction",
+                tags: "Construction \u2022 Sovereignty \u2022 Frameworks",
+                type: "Archive"
+            },
+            {
+                title: "The Wanderer's Compass",
+                date: "",
+                excerpt: "Notes on navigating third density as a conscious wanderer. The Law of One teaches that catalyst is not punishment\u2014it is curriculum.",
+                category: "Law of One",
+                tags: "Law of One \u2022 Catalyst \u2022 Navigation",
+                type: "Public"
+            },
+            {
+                title: "Field Notes: Week One",
+                date: "",
+                excerpt: "A sovereign record of the building process. What was attempted, what held, what broke, and what emerged.",
+                category: "Terravian Journal",
+                tags: "Journal \u2022 Process \u2022 Building",
+                type: "Public"
+            }
+        ];
+
+        const CATEGORIES = [
+            "All",
+            "Power",
+            "Love",
+            "Money",
+            "Density",
+            "Construction",
+            "Law of One",
+            "Terravian Bifurcation Protocol",
+            "Terravian Journal"
+        ];
+
+        // SPA navigation
         function showPage(pageId) {
-            document.querySelectorAll('.page').forEach(page => {
+            document.querySelectorAll('.page').forEach(function(page) {
                 page.classList.remove('active');
             });
             document.getElementById(pageId).classList.add('active');
             window.scrollTo(0, 0);
+            // Close mobile menu
+            var navLinks = document.querySelector('.nav-links');
+            if (navLinks) navLinks.classList.remove('open');
         }
 
-        document.addEventListener('DOMContentLoaded', function() {
-            const filterBtns = document.querySelectorAll('.filter-btn');
-            filterBtns.forEach(btn => {
+        // Render filter buttons
+        function renderFilters() {
+            var container = document.getElementById('categoryFilters');
+            if (!container) return;
+            container.innerHTML = '';
+            CATEGORIES.forEach(function(cat) {
+                var btn = document.createElement('button');
+                btn.className = 'filter-btn' + (cat === 'All' ? ' active' : '');
+                btn.textContent = cat;
                 btn.addEventListener('click', function() {
-                    filterBtns.forEach(b => b.classList.remove('active'));
-                    this.classList.add('active');
+                    document.querySelectorAll('.filter-btn').forEach(function(b) {
+                        b.classList.remove('active');
+                    });
+                    btn.classList.add('active');
+                    renderLetters(cat);
                 });
+                container.appendChild(btn);
             });
+        }
+
+        // Render letter cards
+        function renderLetters(activeCategory) {
+            var grid = document.getElementById('lettersGrid');
+            if (!grid) return;
+            grid.innerHTML = '';
+
+            var filtered = activeCategory === 'All'
+                ? LETTERS_DATA
+                : LETTERS_DATA.filter(function(l) { return l.category === activeCategory; });
+
+            if (filtered.length === 0) {
+                grid.innerHTML = '<p style="text-align:center; color: var(--cream); opacity: 0.6; grid-column: 1/-1; padding: 3rem 0;">No letters in this category yet.</p>';
+                return;
+            }
+
+            filtered.forEach(function(letter) {
+                var card = document.createElement('div');
+                card.className = 'letter-card';
+
+                var dateStr = letter.date ? letter.date + ' \u2022 ' : '';
+                var typeLabel = letter.type === 'Paid' ? 'Paid Subscribers' : letter.type === 'Archive' ? 'Archive' : 'Public Letter';
+
+                card.innerHTML =
+                    '<h3>' + letter.title + '</h3>' +
+                    '<p class="letter-date">' + dateStr + typeLabel + '</p>' +
+                    '<p class="letter-excerpt">' + letter.excerpt + '</p>' +
+                    '<p class="letter-meta">' + letter.tags + '</p>';
+
+                grid.appendChild(card);
+            });
+        }
+
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', function() {
+            renderFilters();
+            renderLetters('All');
         });
     </script>
 </body>
