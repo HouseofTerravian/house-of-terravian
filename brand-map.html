@@ -91,9 +91,66 @@
     letter-spacing: 1px;
     margin-bottom: 6px;
   }
+  /* Gate overlay */
+  #gate-overlay {
+    position: fixed;
+    inset: 0;
+    background: #07070B;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+  }
+  #gate-overlay.unlocked { display: none; }
+  #gate-overlay h2 {
+    color: #D4AF37;
+    font-size: 1.4rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  #gate-overlay p {
+    color: #666;
+    font-size: 0.85rem;
+  }
+  #gate-overlay input {
+    background: #111;
+    border: 1px solid #333;
+    color: #e0e0e0;
+    padding: 10px 16px;
+    font-size: 1rem;
+    border-radius: 6px;
+    width: 260px;
+    text-align: center;
+    outline: none;
+  }
+  #gate-overlay input:focus { border-color: #D4AF37; }
+  #gate-overlay button {
+    background: #D4AF37;
+    color: #07070B;
+    border: none;
+    padding: 10px 32px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    border-radius: 6px;
+    cursor: pointer;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  #gate-overlay button:hover { background: #b8941f; }
+  #gate-overlay .error { color: #C41E3A; font-size: 0.8rem; min-height: 1.2em; }
 </style>
 </head>
 <body>
+
+<div id="gate-overlay">
+  <h2>House of Terravian</h2>
+  <p>Access with intention.</p>
+  <input type="password" id="gate-input" placeholder="Enter access code" autocomplete="off" />
+  <div class="error" id="gate-error"></div>
+  <button onclick="checkGate()">Enter</button>
+</div>
 
 <h1>House of Terravian — Brand Ecosystem</h1>
 <p class="subtitle">Interactive brand map — hover for details, scroll to explore</p>
@@ -106,6 +163,29 @@
 <svg id="canvas"></svg>
 
 <script>
+// ─── ACCESS GATE ───
+const GATE_HASH = '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8'; // sha256 of access code
+async function sha256(msg) {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(msg));
+  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
+}
+async function checkGate() {
+  const input = document.getElementById('gate-input').value.trim();
+  const hash = await sha256(input);
+  if (hash === GATE_HASH || localStorage.getItem('hot_brand_map_access') === 'granted') {
+    localStorage.setItem('hot_brand_map_access', 'granted');
+    document.getElementById('gate-overlay').classList.add('unlocked');
+  } else {
+    document.getElementById('gate-error').textContent = 'Invalid access code.';
+  }
+}
+// Auto-unlock if previously authenticated
+if (localStorage.getItem('hot_brand_map_access') === 'granted') {
+  document.getElementById('gate-overlay').classList.add('unlocked');
+}
+// Enter key support
+document.getElementById('gate-input').addEventListener('keydown', e => { if (e.key === 'Enter') checkGate(); });
+
 // ─── CLUSTER DEFINITIONS ───
 const CLUSTERS = {
   apex:        { label: 'Apex / Legal',           color: '#D4AF37' },
