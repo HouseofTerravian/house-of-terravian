@@ -164,7 +164,7 @@
 
 <script>
 // ─── ACCESS GATE ───
-const GATE_HASH = '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8'; // sha256 of access code
+const GATE_HASH = '3ea87a56da3844b420ec2925ae922bc731ec16a4fc44dcbeafdad49b0e61d39c';
 async function sha256(msg) {
   const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(msg));
   return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
