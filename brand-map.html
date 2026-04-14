@@ -115,9 +115,23 @@
     padding: 0;
   }
   .theme-toggle:hover { border-color: #D4AF37; transform: scale(1.1); }
-  body.sunlight { filter: invert(1) hue-rotate(180deg) saturate(1.6) brightness(1.05); }
-  body.sunlight .theme-toggle { filter: invert(1) hue-rotate(180deg) saturate(1.6) brightness(1.05); }
-  body.sunlight .tooltip { filter: invert(1) hue-rotate(180deg) saturate(1.6) brightness(1.05); }
+  html.sunlight, html.sunlight body {
+    background: #F5F2EE;
+  }
+  html.sunlight body > *:not(.theme-toggle):not(.tooltip) {
+    filter: invert(1) hue-rotate(180deg) saturate(1.8) brightness(1.1);
+  }
+  html.sunlight .tooltip {
+    background: #fff;
+    border-color: #B8941F;
+    color: #222;
+  }
+  html.sunlight .tooltip .tt-name { color: #8B1538; }
+  html.sunlight .tooltip .tt-zone,
+  html.sunlight .tooltip .tt-type,
+  html.sunlight .tooltip .tt-pos { color: #666; }
+  html.sunlight .tooltip .tt-need { color: #8B6914; }
+  html.sunlight .tooltip .tt-desc { color: #333; }
 
 </style>
 </head>
@@ -536,12 +550,12 @@ Object.entries(CLUSTERS).forEach(([key, cl]) => {
   if (!toggle) return;
   var saved = localStorage.getItem('brandmap_theme');
   if (saved === 'sunlight') {
-    document.body.classList.add('sunlight');
+    document.documentElement.classList.add('sunlight');
     toggle.innerHTML = '&#9728;&#65039;';
   }
   toggle.addEventListener('click', function() {
-    document.body.classList.toggle('sunlight');
-    var isSun = document.body.classList.contains('sunlight');
+    document.documentElement.classList.toggle('sunlight');
+    var isSun = document.documentElement.classList.contains('sunlight');
     toggle.innerHTML = isSun ? '&#9728;&#65039;' : '&#127769;';
     localStorage.setItem('brandmap_theme', isSun ? 'sunlight' : 'nightlight');
   });
