@@ -3,9 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" type="image/x-icon" href="favicon.ico">
-<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <title>House of Terravian — Brand Ecosystem Map</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -152,6 +150,100 @@
 <svg id="canvas"></svg>
 
 <script>
+
+// ─── BRAND URLs ───
+const BRAND_URLS = {
+  // Apex / Legal / Entities
+  hot: null,
+  slateriver: null,
+  mcm: "https://mcmenterprisesllc-site.vercel.app",
+  muonelo: null,
+  ea: null,
+  tdt: null,
+  terrsys: "https://terravian-systems-house-of-terravians-projects.vercel.app",
+
+  // Noo World
+  nooworld: "https://www.thenooworld.com",
+  nwcore: "https://nooworld-core.vercel.app",
+  nooworldos: null,
+
+  // Spine / Core
+  otmgpt: "https://otmgpt-site.vercel.app",
+  "911today": "https://911today-site.vercel.app",
+  dreamgpt: null,
+  mrmeta_ent: null,
+  wth: "https://winthehour-site.vercel.app",
+
+  // North Gate — Healing
+  supportgrp: "https://supportgroups-site.vercel.app",
+  mmhw: "https://mmhw-site.vercel.app",
+  mmhwinst: "https://mmhw-institute.vercel.app",
+  mmhwcoach: "https://mmhw-coaching.vercel.app",
+  therapistshield: null,
+
+  // East Gate — Culture / 121212
+  "121212": "https://121212-black.vercel.app",
+  "121212comm": "https://121212-community.vercel.app",
+  "121212events": "https://121212-events.vercel.app",
+  "121212reviews": "https://121212-reviews.vercel.app",
+  "121212gbm": "https://121212-gbm.vercel.app",
+  "121212music": "https://121212-music.vercel.app",
+  "121212culture": "https://121212-culture.vercel.app",
+  "121212law": "https://121212-law.vercel.app",
+  "121212move": "https://121212-movement.vercel.app",
+  "121212terr": "https://121212-territories.vercel.app",
+  my121212: "https://my121212-space.vercel.app",
+  unsignedhype: "https://unsigned-hype.vercel.app",
+
+  // South Gate — Love
+  saga: "https://sagaofpolarity-forum.vercel.app",
+  cl: "https://rg-hhc-travel.vercel.app",
+  rg: "https://rg-hhc-travel.vercel.app",
+  hhc: "https://hhc-travel.vercel.app",
+  hhcvacations: null,
+
+  // West Gate — Knowledge & Execution
+  fg: "https://forbiddengnosis.com",
+  oth: "https://ownthehour-app.vercel.app",
+  crownstrike: "https://crownstrike-official.vercel.app",
+  csportmind: null,
+
+  // Health / Wellness
+  fpwds: "https://fpwds-site.vercel.app",
+  fridays: "https://fridays-rapid-results.vercel.app",
+  grounled: null,
+  bedlam: "https://bedlam-app.vercel.app",
+
+  // Career / Education
+  mca: "https://mycareeragent-site.vercel.app",
+  lp18: "https://launchpad18-site.vercel.app",
+  trpsh: "https://trpsh-site.vercel.app",
+  pathready: null,
+
+  // Productivity / Fitness
+  stepleague: "https://stepleague-site.vercel.app",
+  bossminute: null,
+  secretspga: null,
+  secretsnba: null,
+  sexymanhands: null,
+
+  // B2B / Infrastructure
+  regulatoros: "https://regulatoros-dashboard.vercel.app",
+  stealthapi: "https://invisicore-site.vercel.app",
+  nilgenius: "https://nilgenius.vercel.app",
+  veriscore: null,
+  verifiedaccess: null,
+
+  // Content / Creative
+  mrmulti: null,
+  foodsfuture: "https://foodsfromthefuture-site.vercel.app",
+  tostadas: "https://tostadasfromthefuture-site.vercel.app",
+  greenray: null,
+  movieclub: "https://movie-clubbing-site.vercel.app",
+  residualgpt: null,
+  tdrops: null,
+};
+
 // ─── CLUSTER DEFINITIONS ───
 const CLUSTERS = {
   apex:        { label: 'Apex / Legal',           color: '#D4AF37' },
@@ -533,6 +625,14 @@ NODES.forEach(n => {
   g.addEventListener('mouseleave', () => {
     tooltip.style.display = 'none';
   });
+
+  // Click to open brand URL
+  g.addEventListener('click', () => {
+    const url = BRAND_URLS[n.id];
+    if (url) window.open(url, '_blank', 'noopener');
+  });
+  if (BRAND_URLS[n.id]) g.style.cursor = 'pointer';
+  else g.style.cursor = 'default';
 
   svg.appendChild(g);
 });
