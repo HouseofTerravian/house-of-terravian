@@ -719,96 +719,9 @@
                 grid-template-columns: 1fr;
             }
         }
-        /* Noo World Login Gate */
-        #nw-gate {
-            position: fixed;
-            inset: 0;
-            background: var(--black);
-            z-index: 9999;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 20px;
-            text-align: center;
-            padding: 2rem;
-        }
-        #nw-gate.authenticated { display: none; }
-        #nw-gate .gate-crest {
-            width: 80px;
-            height: 80px;
-            border: 3px solid var(--gold);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            color: var(--gold);
-            margin-bottom: 8px;
-        }
-        #nw-gate h2 {
-            font-family: 'Georgia', serif;
-            color: var(--cream);
-            font-size: 1.6rem;
-            letter-spacing: 2px;
-        }
-        #nw-gate .gate-subtitle {
-            color: #888;
-            font-size: 0.9rem;
-            max-width: 400px;
-            line-height: 1.6;
-        }
-        #nw-gate .nw-login-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: linear-gradient(135deg, var(--burgundy), var(--burgundy-dark));
-            color: var(--cream);
-            border: 2px solid var(--gold);
-            padding: 14px 36px;
-            font-size: 1rem;
-            font-family: 'Georgia', serif;
-            font-weight: 600;
-            letter-spacing: 1px;
-            border-radius: 6px;
-            cursor: pointer;
-            text-decoration: none;
-            transition: all 0.3s;
-            margin-top: 8px;
-        }
-        #nw-gate .nw-login-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 24px rgba(212, 175, 55, 0.3);
-            border-color: var(--gold);
-        }
-        #nw-gate .nw-login-btn .nw-icon {
-            font-size: 1.2rem;
-        }
-        #nw-gate .gate-footer {
-            color: #555;
-            font-size: 0.75rem;
-            margin-top: 24px;
-            letter-spacing: 0.5px;
-        }
-        #nw-gate .gate-footer a {
-            color: var(--gold);
-            text-decoration: underline;
-            text-underline-offset: 2px;
-        }
     </style>
 </head>
 <body>
-    <!-- Noo World Login Gate -->
-    <div id="nw-gate">
-        <div class="gate-crest">T</div>
-        <h2>The House of Terravian</h2>
-        <p class="gate-subtitle">This archive is reserved for members of The Noo World.<br>Sign in to enter.</p>
-        <a class="nw-login-btn" id="nw-login-btn" href="#">
-            <span class="nw-icon">&#9670;</span> Sign in with Noo World
-        </a>
-        <p class="gate-footer">Don't have an account? <a href="https://nooworld-core.vercel.app" target="_blank" rel="noopener">Join The Noo World</a></p>
-    </div>
-
     <!-- Navigation -->
     <nav>
         <div class="nav-container">
@@ -1332,52 +1245,5 @@
         });
     </script>
 
-    <!-- Noo World Auth Gate -->
-    <script>
-    (function() {
-        var NW_LOGIN_URL = 'https://nooworld-core.vercel.app';
-        var TOKEN_KEY = '@hot_nw_token';
-        var gate = document.getElementById('nw-gate');
-        var loginBtn = document.getElementById('nw-login-btn');
-        var returnUrl = encodeURIComponent(window.location.href);
-
-        // Set login button href
-        loginBtn.href = NW_LOGIN_URL + '?redirect=' + returnUrl;
-
-        // Check for token in URL params (returned from Noo World Login)
-        var params = new URLSearchParams(window.location.search);
-        var token = params.get('token') || params.get('nw_token') || params.get('access_token');
-        if (token) {
-            localStorage.setItem(TOKEN_KEY, token);
-            // Clean URL
-            window.history.replaceState({}, '', window.location.pathname);
-        }
-
-        // Also check hash params (some OAuth flows use hash)
-        if (window.location.hash) {
-            var hashParams = new URLSearchParams(window.location.hash.substring(1));
-            var hashToken = hashParams.get('token') || hashParams.get('access_token');
-            if (hashToken) {
-                localStorage.setItem(TOKEN_KEY, hashToken);
-                window.history.replaceState({}, '', window.location.pathname);
-            }
-        }
-
-        // Check if authenticated
-        var stored = localStorage.getItem(TOKEN_KEY);
-        if (stored) {
-            gate.classList.add('authenticated');
-        }
-
-        // Listen for postMessage from Noo World Login (popup/iframe flow)
-        window.addEventListener('message', function(event) {
-            if (event.data && (event.data.token || event.data.nw_token)) {
-                var t = event.data.token || event.data.nw_token;
-                localStorage.setItem(TOKEN_KEY, t);
-                gate.classList.add('authenticated');
-            }
-        });
-    })();
-    </script>
 </body>
 </html>

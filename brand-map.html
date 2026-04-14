@@ -134,9 +134,92 @@
   html.sunlight .tooltip .tt-need { color: #8B6914; }
   html.sunlight .tooltip .tt-desc { color: #333; }
 
+  /* Noo World Login Gate */
+  #nw-gate {
+    position: fixed;
+    inset: 0;
+    background: #07070B;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    text-align: center;
+    padding: 2rem;
+  }
+  #nw-gate.authenticated { display: none; }
+  #nw-gate .gate-crest {
+    width: 80px;
+    height: 80px;
+    border: 3px solid #D4AF37;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: #D4AF37;
+    margin-bottom: 8px;
+  }
+  #nw-gate h2 {
+    color: #F5EBD8;
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+    font-family: Georgia, serif;
+  }
+  #nw-gate .gate-subtitle {
+    color: #888;
+    font-size: 0.9rem;
+    max-width: 400px;
+    line-height: 1.6;
+  }
+  #nw-gate .nw-login-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, #8B1538, #5D0E25);
+    color: #F5EBD8;
+    border: 2px solid #D4AF37;
+    padding: 14px 36px;
+    font-size: 1rem;
+    font-family: Georgia, serif;
+    font-weight: 600;
+    letter-spacing: 1px;
+    border-radius: 6px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s;
+    margin-top: 8px;
+  }
+  #nw-gate .nw-login-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(212, 175, 55, 0.3);
+  }
+  #nw-gate .gate-footer {
+    color: #555;
+    font-size: 0.75rem;
+    margin-top: 24px;
+    letter-spacing: 0.5px;
+  }
+  #nw-gate .gate-footer a {
+    color: #D4AF37;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
 </style>
 </head>
 <body>
+
+<div id="nw-gate">
+  <div class="gate-crest">T</div>
+  <h2>The House of Terravian</h2>
+  <p class="gate-subtitle">The full brand constellation is reserved for members of The Noo World.<br>Sign in to explore.</p>
+  <a class="nw-login-btn" id="nw-login-btn" href="#">
+    <span>&#9670;</span> Sign in with Noo World
+  </a>
+  <p class="gate-footer">Don't have an account? <a href="https://nooworld-core.vercel.app" target="_blank" rel="noopener">Join The Noo World</a></p>
+</div>
+
 <button class="theme-toggle" id="themeToggle" title="Toggle sunlight / nightlight">&#9728;&#65039;</button>
 
 <h1>House of Terravian — Brand Ecosystem</h1>
@@ -660,6 +743,49 @@ Object.entries(CLUSTERS).forEach(([key, cl]) => {
     toggle.innerHTML = isSun ? '&#127769;' : '&#9728;&#65039;';
     localStorage.setItem('brandmap_theme', isSun ? 'sunlight' : 'nightlight');
   });
+})();
+
+// ─── Noo World Auth Gate ───
+(function() {
+    var NW_LOGIN_URL = 'https://nooworld-core.vercel.app';
+    var TOKEN_KEY = '@hot_nw_token';
+    var gate = document.getElementById('nw-gate');
+    var loginBtn = document.getElementById('nw-login-btn');
+    if (!gate || !loginBtn) return;
+
+    var returnUrl = encodeURIComponent(window.location.href);
+    loginBtn.href = NW_LOGIN_URL + '?redirect=' + returnUrl;
+
+    // Check URL params for token (returned from NW Login)
+    var params = new URLSearchParams(window.location.search);
+    var token = params.get('token') || params.get('nw_token') || params.get('access_token');
+    if (token) {
+        localStorage.setItem(TOKEN_KEY, token);
+        window.history.replaceState({}, '', window.location.pathname);
+    }
+
+    // Check hash params
+    if (window.location.hash) {
+        var hashParams = new URLSearchParams(window.location.hash.substring(1));
+        var hashToken = hashParams.get('token') || hashParams.get('access_token');
+        if (hashToken) {
+            localStorage.setItem(TOKEN_KEY, hashToken);
+            window.history.replaceState({}, '', window.location.pathname);
+        }
+    }
+
+    // Authenticated?
+    if (localStorage.getItem(TOKEN_KEY)) {
+        gate.classList.add('authenticated');
+    }
+
+    // Listen for postMessage
+    window.addEventListener('message', function(event) {
+        if (event.data && (event.data.token || event.data.nw_token)) {
+            localStorage.setItem(TOKEN_KEY, event.data.token || event.data.nw_token);
+            gate.classList.add('authenticated');
+        }
+    });
 })();
 
 </script>
