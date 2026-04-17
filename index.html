@@ -1159,6 +1159,15 @@
                 category: "Terravian Journal",
                 tags: "Journal \u2022 Process \u2022 Building",
                 type: "Public"
+            },
+            {
+                title: "Law-of-One Balancing Exercise",
+                date: "Apr 16, 2026",
+                excerpt: "A Temple Protocol for navigating the protector/exhaustion/love-hunger pattern through Ra-style balancing. Nine initiations: set the frame, the three selves, find the distortion, balance pairs, mirror exercise, energy-center translation, prayer, concrete action, and closing.",
+                category: "Law of One",
+                tags: "Law of One \u2022 Initiation Omega \u2022 Balancing \u2022 Vault Tier",
+                type: "Paid",
+                url: "initiation-omega-law-of-one-balancing.html"
             }
         ];
 
@@ -1233,6 +1242,13 @@
                     '<p class="letter-date">' + dateStr + typeLabel + '</p>' +
                     '<p class="letter-excerpt">' + letter.excerpt + '</p>' +
                     '<p class="letter-meta">' + letter.tags + '</p>';
+
+                if (letter.url) {
+                    card.style.cursor = 'pointer';
+                    card.addEventListener('click', function(url) {
+                        return function() { window.open(url, '_blank', 'noopener'); };
+                    }(letter.url));
+                }
 
                 grid.appendChild(card);
             });

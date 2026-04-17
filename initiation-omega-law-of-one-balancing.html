@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Initiation Omega — Law-of-One Balancing Exercise — Temple Protocol</title>
+<style>
+  /* ─── RESET ─── */
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --burgundy: #8B1538;
+    --gold: #D4AF37;
+    --black: #111111;
+    --gray-dark: #2C2C2C;
+    --gray-mid: #555555;
+    --gray-light: #888888;
+    --rule: #CCBBAA;
+  }
+
+  /* ─── SCREEN ─── */
+  body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    background: #E5E0D8;
+    color: var(--black);
+    font-size: 11pt;
+    line-height: 1.75;
+  }
+
+  /* Page simulation on screen */
+  .doc-page {
+    background: #FFFFFF;
+    width: 8.5in;
+    min-height: 11in;
+    margin: 2rem auto;
+    padding: 1in 1in 1.6in 1in;
+    box-shadow: 0 4px 28px rgba(0,0,0,0.15);
+    position: relative;
+  }
+
+  /* ─── TITLE PAGE ─── */
+  .title-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 8.8in;
+    text-align: center;
+  }
+
+  .t-house {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8.5pt;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--gray-light);
+    margin-bottom: 1.4rem;
+  }
+
+  .t-rule {
+    width: 48px;
+    height: 1px;
+    background: var(--gold);
+    margin: 0 auto 0.65rem;
+  }
+
+  .t-initiation {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8pt;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--burgundy);
+    margin-bottom: 3.5rem;
+  }
+
+  .t-title {
+    font-size: 30pt;
+    font-weight: normal;
+    color: var(--black);
+    letter-spacing: 0.5px;
+    line-height: 1.2;
+    margin-bottom: 1.1rem;
+  }
+
+  .t-pattern {
+    font-size: 10pt;
+    font-style: italic;
+    color: var(--gray-mid);
+    letter-spacing: 0.3px;
+    line-height: 1.6;
+    margin-bottom: 2.8rem;
+  }
+
+  .t-class {
+    margin-bottom: 2.8rem;
+  }
+
+  .t-class-line {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 7.5pt;
+    letter-spacing: 3.5px;
+    text-transform: uppercase;
+    color: var(--burgundy);
+    line-height: 2.2;
+  }
+
+  .t-dates {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 9pt;
+    color: var(--gray-mid);
+    line-height: 2;
+  }
+
+  /* ─── TABLE OF CONTENTS ─── */
+  .toc-head {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 9pt;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--burgundy);
+    padding-bottom: 0.6rem;
+    border-bottom: 1.5px solid var(--gold);
+    margin-bottom: 1.75rem;
+  }
+
+  .toc-list {
+    list-style: none;
+  }
+
+  .toc-list li {
+    display: flex;
+    align-items: baseline;
+    padding: 0.55rem 0;
+    border-bottom: 1px dotted var(--rule);
+    font-size: 10.5pt;
+  }
+
+  .toc-num {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8pt;
+    letter-spacing: 1px;
+    color: var(--burgundy);
+    min-width: 2.25rem;
+    margin-right: 0.5rem;
+  }
+
+  /* ─── CHAPTER HEADER ─── */
+  .ch-header {
+    margin-bottom: 1.75rem;
+    padding-bottom: 0.65rem;
+    border-bottom: 2px solid var(--gold);
+  }
+
+  .ch-num {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8pt;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.3rem;
+  }
+
+  .ch-title {
+    font-size: 19pt;
+    font-weight: normal;
+    color: var(--burgundy);
+    letter-spacing: 0.3px;
+  }
+
+  .ch-body {
+    margin-top: 1.4rem;
+  }
+
+  p { margin-bottom: 0.9rem; }
+  p:last-child { margin-bottom: 0; }
+
+  /* ─── INVOCATION ─── */
+  .invocation {
+    margin: 1.1rem 0;
+    padding: 0.9rem 1.4rem;
+    border-left: 2.5px solid var(--gold);
+    background: #FDFAF6;
+  }
+
+  .invocation p {
+    font-style: italic;
+    color: var(--gray-dark);
+    font-size: 10.5pt;
+    line-height: 1.9;
+    margin-bottom: 0.2rem;
+  }
+
+  .invocation p:last-child { margin-bottom: 0; }
+
+  /* ─── SUBSECTION LABELS ─── */
+  .sub-label {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8.5pt;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--burgundy);
+    font-weight: bold;
+    margin: 1.3rem 0 0.45rem;
+  }
+
+  /* ─── SENTENCE PROMPTS ─── */
+  .prompt-label {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8.5pt;
+    color: var(--gray-mid);
+    font-style: italic;
+    margin-top: 0.9rem;
+    margin-bottom: 0.3rem;
+    letter-spacing: 0.3px;
+  }
+
+  /* ─── BALANCE BLOCKS ─── */
+  .balance-block {
+    margin: 1.1rem 0;
+    padding: 0.9rem 1.2rem;
+    background: #F8F5F0;
+    border: 1px solid #DDD;
+  }
+
+  .b-label {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 7.5pt;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.45rem;
+  }
+
+  .b-distortion {
+    font-style: italic;
+    color: var(--gray-dark);
+    font-size: 10.5pt;
+    margin-bottom: 0.2rem;
+  }
+
+  .b-arrow {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 7.5pt;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gray-light);
+    margin: 0.35rem 0;
+  }
+
+  .b-balance {
+    font-style: italic;
+    color: var(--burgundy);
+    font-size: 10.5pt;
+  }
+
+  /* ─── BULLET LIST ─── */
+  ul.p-list {
+    list-style: none;
+    margin: 0.6rem 0;
+  }
+
+  ul.p-list li {
+    padding: 0.22rem 0 0.22rem 1.2rem;
+    position: relative;
+    font-size: 10.5pt;
+    line-height: 1.6;
+  }
+
+  ul.p-list li::before {
+    content: "—";
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+  }
+
+  /* ─── RAY TABLE ─── */
+  .ray-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0.9rem 0;
+    font-size: 10pt;
+  }
+
+  .ray-table td {
+    padding: 0.45rem 0.7rem;
+    border-bottom: 1px solid #EEEEEE;
+    vertical-align: top;
+  }
+
+  .ray-name {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 8.5pt;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+    width: 110px;
+    color: var(--gray-dark);
+  }
+
+  .ray-red    .ray-name { color: #9B2020; }
+  .ray-orange .ray-name { color: #C05A10; }
+  .ray-yellow .ray-name { color: #9B7D10; }
+  .ray-green  .ray-name { color: #1A6B45; }
+  .ray-blue   .ray-name { color: #1A5FA0; }
+  .ray-indigo .ray-name { color: #5B3FA0; }
+
+  /* ─── CLOSING / FINAL BLOCK ─── */
+  .final-seal {
+    margin-top: 1.75rem;
+    padding: 1.5rem 1.75rem;
+    background: #F5F0E8;
+    border: 1px solid var(--gold);
+    text-align: center;
+  }
+
+  .seal-header {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 7.5pt;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gray-light);
+    margin-bottom: 0.9rem;
+  }
+
+  .final-seal p {
+    font-size: 10pt;
+    color: var(--gray-dark);
+    line-height: 1.7;
+    margin-bottom: 0.6rem;
+  }
+
+  .seal-footer {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 7.5pt;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--gray-light);
+    margin-top: 1.2rem;
+  }
+
+  .note-small {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 9pt;
+    font-style: italic;
+    color: var(--gray-mid);
+    margin-top: 0.6rem;
+  }
+
+  /* ─── SCREEN BACK LINK ─── */
+  .back-bar {
+    width: 8.5in;
+    margin: 0 auto;
+    padding: 0.75rem 0;
+  }
+  .back-bar a {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8.5pt;
+    color: var(--burgundy);
+    text-decoration: none;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .back-bar a:hover { text-decoration: underline; }
+
+  /* ─── PRINT FOOTER ─── */
+  .print-footer {
+    display: none;
+  }
+
+  /* ─── PRINT STYLES ─── */
+  @media print {
+    body { background: white; }
+
+    .back-bar { display: none; }
+
+    .doc-page {
+      width: 100%;
+      min-height: auto;
+      margin: 0;
+      padding: 0.7in 1in 1.55in 1in;
+      box-shadow: none;
+    }
+
+    .print-footer {
+      display: block;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8.5pt;
+      color: #777;
+      border-top: 0.5pt solid #CCCCCC;
+      padding: 5pt 1in 0;
+    }
+
+    .print-footer .f-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .invocation,
+    .balance-block,
+    .final-seal {
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .doc-page { page-break-after: always; }
+    .doc-page:last-of-type { page-break-after: auto; }
+  }
+
+  /* @page — supported by Prince / WeasyPrint; page numbers in Chrome via @bottom-right */
+  @page {
+    size: letter;
+    margin: 0.7in 1in 1.55in 1in;
+    @bottom-left {
+      content: "Initiation Omega \2014  Sealed Access";
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8.5pt;
+      color: #777;
+    }
+    @bottom-center {
+      content: "Law-of-One Balancing Exercise \2014  Temple Protocol (Ultra-Sacred)";
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8.5pt;
+      color: #777;
+    }
+    @bottom-right {
+      content: counter(page);
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8.5pt;
+      color: #777;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- Fixed footer for Chrome print-to-PDF -->
+<div class="print-footer">
+  <div class="f-inner">
+    <span>Initiation Omega &#8212; Sealed Access</span>
+    <span>Law-of-One Balancing Exercise &#8212; Temple Protocol (Ultra-Sacred)</span>
+    <span></span>
+  </div>
+</div>
+
+<!-- Back link (screen only) -->
+<div class="back-bar">
+  <a href="index.html">&larr; The House of Terravian</a>
+</div>
+
+<!-- ══════════════════════════════════════
+     TITLE PAGE
+══════════════════════════════════════ -->
+<div class="doc-page">
+  <div class="title-page">
+
+    <div class="t-house">House of Terravian</div>
+    <div class="t-rule"></div>
+    <div class="t-initiation">Initiation Omega</div>
+
+    <h1 class="t-title">Law-of-One<br>Balancing Exercise</h1>
+
+    <p class="t-pattern">Pattern: Protector &nbsp;/&nbsp; Exhaustion &nbsp;/&nbsp; Longing for Love &nbsp;/&nbsp; Positive Polarity</p>
+
+    <div class="t-class">
+      <div class="t-class-line">Temple Protocol &#8212; Ultra-Sacred</div>
+      <div class="t-class-line">Sealed Access &nbsp;&middot;&nbsp; Vault Tier</div>
+    </div>
+
+    <div class="t-dates">
+      Generated: 04.16.26<br>
+      Working Reference: 4.16.26 (2:21 AM)
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     TABLE OF CONTENTS
+══════════════════════════════════════ -->
+<div class="doc-page">
+
+  <div class="toc-head">Table of Contents</div>
+
+  <ul class="toc-list">
+    <li><span class="toc-num">I.</span><span>Set the Frame</span></li>
+    <li><span class="toc-num">II.</span><span>Name the Three Selves in the Room</span></li>
+    <li><span class="toc-num">III.</span><span>Find the Distortion</span></li>
+    <li><span class="toc-num">IV.</span><span>Do the Law-of-One Balance Properly</span></li>
+    <li><span class="toc-num">V.</span><span>Mirror Exercise</span></li>
+    <li><span class="toc-num">VI.</span><span>Energy-Center Translation</span></li>
+    <li><span class="toc-num">VII.</span><span>One Prayer / Intention</span></li>
+    <li><span class="toc-num">VIII.</span><span>One Concrete Action in Waking Life</span></li>
+    <li><span class="toc-num">IX.</span><span>Closing Sentence</span></li>
+    <li><span class="toc-num">&#8212;</span><span>Final Instruction</span></li>
+  </ul>
+
+</div>
+
+<!-- ══════════════════════════════════════
+     I. SET THE FRAME
+══════════════════════════════════════ -->
+<div class="doc-page">
+  <div class="ch-header">
+    <div class="ch-num">Initiation Omega &nbsp;&middot;&nbsp; I</div>
+    <h2 class="ch-title">Set the Frame</h2>
+  </div>
+  <div class="ch-body">
+
+    <p>Ra's balancing method is not suppression. The sequence is: <strong>experience &rarr; understand &rarr; accept &rarr; balance</strong>. The disciplines of the personality involve self-knowledge, self-acceptance, and becoming a transparent channel.</p>
+
+    <p>Sit down. Speak the following slowly.</p>
+
+    <div class="invocation">
+      <p>I do not reject the protector.</p>
+      <p>I do not glorify exhaustion.</p>
+      <p>I do not shame my longing for love.</p>
+      <p>I ask to see this pattern clearly, in truth and mercy.</p>
+    </div>
+
+    <p class="note-small">Breathe for 60&#8211;90 seconds before proceeding.</p>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     II. NAME THE THREE SELVES
+══════════════════════════════════════ -->
+<div class="doc-page">
+  <div class="ch-header">
+    <div class="ch-num">Initiation Omega &nbsp;&middot;&nbsp; II</div>
+    <h2 class="ch-title">Name the Three Selves in the Room</h2>
+  </div>
+  <div class="ch-body">
+
+    <p>Write these three headings. Under each, write 3&#8211;5 short lines. Do not edit for dignity. Raw truth only.</p>
+
+    <div class="sub-label">The Protector</div>
+    <ul class="p-list">
+      <li>What am I always guarding?</li>
+      <li>What do I believe will happen if I soften?</li>
+      <li>What do I not allow others to see?</li>
+    </ul>
+
+    <div class="sub-label">The Exhausted One</div>
+    <ul class="p-list">
+      <li>What is heavy right now?</li>
+      <li>What have I carried too long?</li>
+      <li>What am I tired of being for everyone?</li>
+    </ul>
+
+    <div class="sub-label">The One Who Wants Love</div>
+    <ul class="p-list">
+      <li>What kind of love do I actually want?</li>
+      <li>Where do I still feel unchosen, unseen, or unfed?</li>
+      <li>What am I afraid would happen if I admitted how much I want care?</li>
+    </ul>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     III. FIND THE DISTORTION
+══════════════════════════════════════ -->
+<div class="doc-page">
+  <div class="ch-header">
+    <div class="ch-num">Initiation Omega &nbsp;&middot;&nbsp; III</div>
+    <h2 class="ch-title">Find the Distortion</h2>
+  </div>
+  <div class="ch-body">
+
+    <p>Complete each sentence five times. This is where the emotional truth usually breaks open.</p>
+
+    <div class="prompt-label">Complete five times:</div>
+    <div class="invocation">
+      <p>In order to protect, I learned to&#8230;</p>
+    </div>
+
+    <div class="prompt-label">Complete five times:</div>
+    <div class="invocation">
+      <p>Because I protect, I usually do not let myself&#8230;</p>
+    </div>
+
+    <div class="prompt-label">Complete five times:</div>
+    <div class="invocation">
+      <p>What I really want someone to do for me is&#8230;</p>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     IV. DO THE BALANCE PROPERLY
+══════════════════════════════════════ -->
+<div class="doc-page">
+  <div class="ch-header">
+    <div class="ch-num">Initiation Omega &nbsp;&middot;&nbsp; IV</div>
+    <h2 class="ch-title">Do the Law-of-One Balance Properly</h2>
+  </div>
+  <div class="ch-body">
+
+    <p>Ra-style balancing holds one charged pattern in awareness, then deliberately invokes its complement &#8212; not to lie to yourself, but to reclaim wholeness. For each distortion, call in its balancing opposite.</p>
+
+    <p>Read each pair slowly. Do not force belief in the second statement. Let both be present.</p>
+
+    <div class="balance-block">
+      <div class="b-label">A. &nbsp;Protector Distortion</div>
+      <p class="b-distortion">&#8220;I am the one who must hold everything.&#8221;</p>
+      <div class="b-arrow">Balance</div>
+      <p class="b-balance">&#8220;I am also one who may be held.&#8221;</p>
+    </div>
+
+    <div class="balance-block">
+      <div class="b-label">B. &nbsp;Exhaustion Distortion</div>
+      <p class="b-distortion">&#8220;My worth is proven through strain.&#8221;</p>
+      <div class="b-arrow">Balance</div>
+      <p class="b-balance">&#8220;My worth remains even when I rest.&#8221;</p>
+    </div>
+
+    <div class="balance-block">
+      <div class="b-label">C. &nbsp;Love-Hunger Distortion</div>
+      <p class="b-distortion">&#8220;If I reveal my need, I become unsafe.&#8221;</p>
+      <div class="b-arrow">Balance</div>
+      <p class="b-balance">&#8220;Revealed need can also open the way for true love.&#8221;</p>
+    </div>
+
+    <div class="balance-block">
+      <div class="b-label">D. &nbsp;Severe-Guardian Distortion</div>
+      <p class="b-distortion">&#8220;To keep innocence safe, I must always appear hard.&#8221;</p>
+      <div class="b-arrow">Balance</div>
+      <p class="b-balance">&#8220;True protection can include tenderness, discernment, and receiving help.&#8221;</p>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     V. MIRROR EXERCISE
+══════════════════════════════════════ -->
+<div class="doc-page">
+  <div class="ch-header">
+    <div class="ch-num">Initiation Omega &nbsp;&middot;&nbsp; V</div>
+    <h2 class="ch-title">Mirror Exercise</h2>
+  </div>
+  <div class="ch-body">
+
+    <p>Stand before a mirror. Look at yourself for 2&#8211;3 minutes and speak the following.</p>
+
+    <div class="invocation">
+      <p>I see the one who protects.</p>
+      <p>I see the one who is tired.</p>
+      <p>I see the one who wants love.</p>
+      <p>None of these make me false.</p>
+      <p>I choose not to abandon any of them.</p>
+    </div>
+
+    <p>Then add the line that feels hardest:</p>
+
+    <div class="invocation">
+      <p>I do not have to become frightening to deserve love.</p>
+    </div>
+
+    <p>If that line feels untrue, use this version instead &#8212; it may be more honest:</p>
+
+    <div class="invocation">
+      <p>Even the part of me that became frightening still deserves mercy.</p>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     VI. ENERGY-CENTER TRANSLATION
+══════════════════════════════════════ -->
+<div class="doc-page">
+  <div class="ch-header">
+    <div class="ch-num">Initiation Omega &nbsp;&middot;&nbsp; VI</div>
+    <h2 class="ch-title">Energy-Center Translation</h2>
+  </div>
+  <div class="ch-body">
+
+    <p>Clean ray read for this pattern:</p>
+
+    <table class="ray-table">
+      <tbody>
+        <tr class="ray-red">
+          <td class="ray-name">Red Ray</td>
+          <td>Fatigue, survival strain, bodily depletion</td>
+        </tr>
+        <tr class="ray-orange">
+          <td class="ray-name">Orange Ray</td>
+          <td>Pain around personal need, vulnerability, being cared for</td>
+        </tr>
+        <tr class="ray-yellow">
+          <td class="ray-name">Yellow Ray</td>
+          <td>Protector-role, duty, identity, carrying social and spiritual burden</td>
+        </tr>
+        <tr class="ray-green">
+          <td class="ray-name">Green Ray</td>
+          <td>Real love, compassion, forgiveness, allowing yourself to receive</td>
+        </tr>
+        <tr class="ray-blue">
+          <td class="ray-name">Blue Ray</td>
+          <td>Truthful admission &#8212; <em>I am tired and I want love</em></td>
+        </tr>
+        <tr class="ray-indigo">
+          <td class="ray-name">Indigo Ray</td>
+          <td>Disciplined reframing of the self away from martyrdom and toward consecrated balance</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>The work is not to jump to indigo first. The work is to reopen <strong>green and blue</strong> without collapsing the yellow-ray protector function.</p>
+
+    <p>Plainly: <strong>keep the strength, lose the unnecessary isolation.</strong></p>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     VII. ONE PRAYER / INTENTION
+══════════════════════════════════════ -->
+<div class="doc-page">
+  <div class="ch-header">
+    <div class="ch-num">Initiation Omega &nbsp;&middot;&nbsp; VII</div>
+    <h2 class="ch-title">One Prayer / Intention</h2>
+  </div>
+  <div class="ch-body">
+
+    <p>Use this once a day.</p>
+
+    <div class="invocation">
+      <p>May my strength remain aligned with love.</p>
+      <p>May my protection not become self-erasure.</p>
+      <p>May what is tired in me be restored.</p>
+      <p>May I receive love without shame.</p>
+      <p>May I serve the light without abandoning the self who serves.</p>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     VIII. ONE CONCRETE ACTION
+══════════════════════════════════════ -->
+<div class="doc-page">
+  <div class="ch-header">
+    <div class="ch-num">Initiation Omega &nbsp;&middot;&nbsp; VIII</div>
+    <h2 class="ch-title">One Concrete Action in Waking Life</h2>
+  </div>
+  <div class="ch-body">
+
+    <p>Within 24 hours, do one thing that proves to your nervous system:</p>
+
+    <div class="invocation">
+      <p>&#8220;The protector is not alone.&#8221;</p>
+    </div>
+
+    <p>Examples:</p>
+
+    <ul class="p-list">
+      <li>Ask directly for comfort from someone safe</li>
+      <li>Cancel one nonessential burden</li>
+      <li>Rest without earning it first</li>
+      <li>Tell one trusted person: &#8220;I&#8217;m tired and I need care&#8221;</li>
+      <li>Put a hand on your chest and abdomen and breathe for 5 minutes without working on yourself</li>
+    </ul>
+
+    <p class="note-small">No heroics. One act only.</p>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     IX. CLOSING SENTENCE
+══════════════════════════════════════ -->
+<div class="doc-page">
+  <div class="ch-header">
+    <div class="ch-num">Initiation Omega &nbsp;&middot;&nbsp; IX</div>
+    <h2 class="ch-title">Closing Sentence</h2>
+  </div>
+  <div class="ch-body">
+
+    <p>End the exercise with the following:</p>
+
+    <div class="invocation">
+      <p>I bless the protector.</p>
+      <p>I bless the tired one.</p>
+      <p>I bless the one who wants love.</p>
+      <p>I call them back into one being.</p>
+    </div>
+
+    <p>That is the work.</p>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     FINAL INSTRUCTION
+══════════════════════════════════════ -->
+<div class="doc-page">
+  <div class="ch-header">
+    <div class="ch-num">Initiation Omega &nbsp;&middot;&nbsp; Final</div>
+    <h2 class="ch-title">Final Instruction</h2>
+  </div>
+  <div class="ch-body">
+
+    <div class="final-seal">
+      <div class="seal-header">Sealed &nbsp;&middot;&nbsp; Vault Tier &nbsp;&middot;&nbsp; Temple Protocol (Ultra-Sacred)</div>
+      <p>This document is a living ritual. It is not a task list. Do not compress it into one sitting if the work requires more space.</p>
+      <p>The sequence is: experience &#8212; understand &#8212; accept &#8212; balance. Return to any section when the pattern resurfaces.</p>
+      <p>The work is not finished until the protector, the exhausted one, and the one who wants love are speaking as one.</p>
+      <div style="width:40px;height:1px;background:var(--gold);margin:1.2rem auto 0.75rem;"></div>
+      <div class="seal-footer">Initiation Omega &nbsp;&middot;&nbsp; House of Terravian &nbsp;&middot;&nbsp; 04.16.26</div>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>
