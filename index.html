@@ -1421,10 +1421,63 @@
             if (e.key === 'Escape') closeLetterModal();
         });
 
+        const LEGAL_CARDS_DATA = [
+            { title: "Trust of Terravian",    date: "Jan 17, 2026", badge: "Public Letter", body: "The charter, the lineage, the structure. The Toravian Dynasty Estate is structured for continuity\u2014not just for creators, but for generations." },
+            { title: "Intellectual Property", date: "Mar 19, 2026", badge: "Public Letter", body: "Rights and licenses woven into stewardship of language, symbol, and lineage architecture. IP as sacred trust, not commodity." },
+            { title: "Ethics & Enforcement",  date: "Feb 28, 2026", badge: "Public Letter", body: "Trustworthiness in action. Transparency protocols including licensing revokes and entity strike ethics. Boundaries that matter." },
+            { title: "Contact & Counsel",     date: "Feb 5, 2026",  badge: "Public Letter", body: "Thresholds for legal counsel, contact windows, and next actions after high-integrity sign. Access with intention." }
+        ];
+
+        const SERVICE_CARDS_DATA = [
+            { title: "Safe Harbor",        badge: "Community Service", body: "Private convocation calls for leaders caught in crossfire. When the systems around you collapse and you\u2019re still standing\u2014what then? Confidential support for those navigating impossible positions." },
+            { title: "Burnout Prevention", badge: "Community Service", body: "Honest counsel for those on the brink of despair. Not inspiration\u2014orientation. For healers, builders, and caretakers who\u2019ve forgotten how to receive what they so freely give." },
+            { title: "Crisis Triage",      badge: "Community Service", body: "Confidential support for those in acute distress. Immediate assessment, resource navigation, and reality-testing for moments when clarity is a matter of survival. No judgment. No performance required." },
+            { title: "System Unburdening", badge: "Community Service", body: "Strategic listening for worldbearers. For those carrying organizational dysfunction, intergenerational trauma, or systemic injustice in their bodies\u2014a space to name what cannot be named elsewhere." }
+        ];
+
+        function openInfoModal(data, isService) {
+            document.getElementById('modalBadge').textContent = data.badge;
+            document.getElementById('modalTitle').textContent = data.title;
+            document.getElementById('modalDate').textContent = data.date || '';
+            document.getElementById('modalBody').textContent = data.body;
+            document.getElementById('modalTags').textContent = '';
+            document.getElementById('modalSubscribe').style.display = 'none';
+
+            var actions = document.getElementById('modalActions');
+            actions.innerHTML = '';
+
+            if (isService) {
+                var reqBtn = document.createElement('button');
+                reqBtn.className = 'btn';
+                reqBtn.textContent = 'Request Support \u2192';
+                reqBtn.onclick = function() { alert('Community Service Contact: service@houseofterravian.com'); };
+                actions.appendChild(reqBtn);
+            } else {
+                var closeBtn = document.createElement('button');
+                closeBtn.className = 'btn btn-secondary';
+                closeBtn.textContent = 'Close';
+                closeBtn.onclick = closeLetterModal;
+                actions.appendChild(closeBtn);
+            }
+
+            document.getElementById('letterModal').classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
         // Initialize on load
         document.addEventListener('DOMContentLoaded', function() {
             renderFilters();
             renderLetters('All');
+
+            document.querySelectorAll('.legal-card').forEach(function(card, i) {
+                card.style.cursor = 'pointer';
+                card.addEventListener('click', function() { openInfoModal(LEGAL_CARDS_DATA[i], false); });
+            });
+
+            document.querySelectorAll('.service-card').forEach(function(card, i) {
+                card.style.cursor = 'pointer';
+                card.addEventListener('click', function() { openInfoModal(SERVICE_CARDS_DATA[i], true); });
+            });
         });
     </script>
 
